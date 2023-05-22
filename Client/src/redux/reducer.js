@@ -1,51 +1,56 @@
-import { ADD_FAV, REMOVE_FAV, FILTER, ORDER } from "./action-type"
-import axios from "axios";
+import { ADD_FAV, FILTER, ORDER, REMOVE_FAV } from "./types"
+
 
 const initialState = {
-  myFavorites: [],
-  allCharactersFav: [] // ES LA COPIA PARA PODER ORDENAR O FILTRAR
-};
-
-const rootReducer = (state = initialState, action) => {
-
-  switch(action.type){
-
-    case ADD_FAV:
-      return { ...state, myFavorites: action.payload, allCharacters: action.payload };
-
-    case REMOVE_FAV: {
-      return { ...state, myFavorites: action.payload };
-    }
-
-    case FILTER: {
-        if (action.payload === "All") {
-          return {
-            ...state,
-            myFavorites: state.allCharactersFav
-          }
-        }
-        else {
-          let allCharactersFavFilter = state.allCharactersFav.filter((character) => character.gender === action.payload)
-          return {
-            ...state,
-            myFavorites: allCharactersFavFilter
-          }
-        }
-    };
-
-    case ORDER: {
-      const allCharactersFavCopy = [...state.allCharactersFav]
-      return{
-        ...state,
-        myFavorites: action.payload === "A"
-          ? allCharactersFavCopy.sort((a,b) => a.id - b.id)
-          : allCharactersFavCopy.sort((a,b) => b.id - a.id)
-      }
-    };
-
-    default:
-      return { ...state }
-  }
+    myFavorites: [],
+    allCharacters: []
 }
 
-export default rootReducer;
+const reducer = ( state = initialState, action) => {
+    switch(action.type){
+        case ADD_FAV:
+            case 'ADD_FAV':
+            return { 
+                ...state,
+                myFavorites: action.payload, 
+                allCharacters: action.payload };
+
+        case REMOVE_FAV:
+                return { 
+                    ...state, 
+                    myFavorites: action.payload 
+                    };
+
+        case FILTER:
+            let copyFilter = state.allCharacters.filter((character) => character.gender === action.payload)
+            return {
+                ...state,
+                myFavorites: copyFilter
+            }
+
+        case ORDER:
+            const orderCharacters = state.allCharacters.sort((a, b)=>{
+                if(action.payload === "A"){
+                    if(a.id < b.id) return -1;
+                    if(b.id < a.id) return 1;
+                    return 0
+                } else {
+                    if(a.id < b.id) return 1;
+                    if(b.id < a.id) return -1
+                    return 0
+                }
+            })
+            return {
+                ...state,
+                myFavorites: [...orderCharacters]
+            }
+
+        default:
+            return {
+                ...state
+            }
+    }
+}
+
+export default reducer
+

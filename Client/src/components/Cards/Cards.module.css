@@ -1,7 +1,0 @@
-.CardsContainer{
-    display: grid;
-    grid-template-columns: repeat(5,1fr);
-    width: 85%;
-    margin: 15px auto 0 auto;
-  }
-  

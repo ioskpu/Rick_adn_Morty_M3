@@ -11,21 +11,3 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
-
-:root{
-  /* background-color: ; */
-  --bg-primary: white;
-  --bg-secundary: aqua;
-  --bg-tertiary: black;
-
-  /* text color */
-
-  --tx-primary: black;
-  --tx-secondary: rgb(214, 106, 18);
-
-  /* text font */
-
-  --tx-font: sanserif;
-  --tx-normal: ubuntu;
-
-}

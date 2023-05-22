@@ -1,96 +1,106 @@
-import "./App.css";
-import Start from './components/start/Start';
-import Cards from "./components/Cards/Cards.jsx";
-import Nav from "./components/Nav/Nav";
-import About from "./components/About/About"
-import Favorites from "./components/Favorites/Favorites";
-import Detail from "./components/Detail/Detail"
-import Form from "./components/Form/Form";
-import Footer from "./components/Nav/Footer";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
-
-import { useState, useEffect } from "react";
 import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
-import styled from "styled-components";
+import "./App.css";
+import Cards from "./components/Cards";
+import Nav from "./components/Nav";
+import About from "./components/About";
+import Detail from "./components/Detail";
+import NotFound from "./components/NotFound";
+import Form from "./components/Form";
+import Favorites from "./components/Favorites";
 
-
-const App = () => {
-
-  const [characters, setCharacters] = useState([]);
-  const { pathname } = useLocation();
-  const [access, setAccess] = useState(false);
+function App() {
   const navigate = useNavigate();
+  const location = useLocation();
+
+  const [access, setAccess] = React.useState(false);
+  // const EMAIL = "Danigomez.serme@gmail.com";
+  // const PASSWORD =  "@Qwerty1";
+
+  async function login(userData) {
+    try {
+      const { email, password } = userData;
+      const URL = 'http://localhost:3001/rickandmorty/login/';
+      const QUERY=  `?email=${email}&password=${password}`
+      const { data } = await axios(URL + QUERY)
+        const { access } = data;
+        setAccess(data);
+        access && navigate('/home');
+    
+    } 
+    catch (error) {
+        return { error: error.message};
+    }
+  
+  }
 
   useEffect(() => {
-    !access && navigate('/');
+    !access && navigate("/");
   }, [access]);
 
-// // datos para acceso falsos
-// const username = "henry@mail.com"
-// const password = "henry2023"
-
-
-  // handlers
-  const URL_BASE = "http://localhost:3001/rickandmorty/character/";
-  //const API_KEY = "e55f4eeff684.4671def8166b7fc446be";
-
-  const onSearch = (id) => {
-    axios(`${URL_BASE}/${id}`)
-      .then((response) => response.data)
-      .then((data) => {
-        if (data.name) {
-          setCharacters((oldChars) => [...oldChars, data]);
-        } else {
-          alert("¡No hay personajes con este ID!");
-        }
-      });
+  const logout = () => {
+    setAccess(false);
+    navigate("/");
   };
+
+  const [characters, setCharacters] = React.useState([]);
+
+  async function onSearch(id) {
+    try {
+      const url = "http://localhost:3001/rickandmorty/character/" + id;
+
+      const { data } = await axios(url);
+      const char = characters?.find((e) => e.id === Number(data.id));
+
+      if (char) {
+        alert("Already in the list");
+      } else if (data.id !== undefined) {
+        setCharacters((characters) => [...characters, data]);
+      } else {
+        alert("Character not found");
+      }
+    } catch (error) {
+      return { error: error.message };
+    }
+  }
 
   const onClose = (id) => {
-    const charactersFiltered = characters.filter(
-      (character) => character.id !== id
-    );
-    setCharacters(charactersFiltered);
+    setCharacters((oldChars) => {
+      return oldChars.filter((ch) => ch.id !== id);
+    });
   };
 
-  // const handleLogin = (userData) => {
-  //   if (userData.username === username && userData.password === password){
-  //     setAccess(true);
-  //     navigate("/home");
-  //   }
-  //   else alert("Datos incorrectos")
-  // }
-  function login(userData) {
-    const { email, password } = userData;
-    const URL = 'http://localhost:3001/rickandmorty/login/';
-    axios(URL + `?email=${email}&password=${password}`).then(({ data }) => {
-       const { access } = data;
-       setAccess(data);
-       access && navigate('/home');
-    });
- }
-
-// renderizado
   return (
-    <div className="App">
-      {pathname !== "/" && <Nav onSearch={ onSearch } login = { setAccess } />}
+    <div className="container">
+      {location.pathname === "/" ? null : (
+        <Nav logout={logout} onSearch={onSearch} />
+      )}
 
       <Routes>
+        <Route path="/" element={<Form login={login} />}></Route>
 
-      <Route path="/" element={<Start login={ login }/>} />
+        <Route
+          path="/home"
+          element={<Cards onClose={onClose} characters={characters}></Cards>}
+        >
+          {" "}
+        </Route>
 
-      <Route path='/start' element={<Form login={login}/>} Nav={false}/>
+        <Route path="/about" element={<About />}>
+          {" "}
+        </Route>
 
-      <Route path="/home" element={<Cards characters={ characters } onClose={ onClose } />} />
+        <Route path="/detail/:id" element={<Detail />}>
+          {" "}
+        </Route>
 
-      <Route path="/about" element={<About />} />
+        <Route path="/favorites" element={<Favorites/>}>
+          {" "}
+        </Route>
 
-      <Route path="/favorites" element={<Favorites />} />
-
-      <Route path="/detail/:id" element={<Detail />} />
-
+        <Route path="*" element={<NotFound />} />
       </Routes>
-      <Footer />
     </div>
   );
 }

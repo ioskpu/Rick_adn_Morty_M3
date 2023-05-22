@@ -1,0 +1,107 @@
+/*codigo NAVBAR y LOGO*/
+.nav{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.84)
+}
+
+.img_container{
+  margin-top: 2%;
+  margin-left: 2%;
+  width: 15%;
+}
+
+.logo{
+  width: 100%;
+  border-radius: 0;
+}
+
+/*codigo BURGER MENU*/
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+  margin-right: 10%;
+}
+
+.dropbtn {
+  background-color: transparent;
+  color: white;
+  padding: 0;
+  font-size: 16px;
+  border: none;
+  box-shadow: none;
+  cursor: pointer;
+  width: 30px;
+}
+
+.dropbtn:hover{
+  background-color: transparent;
+  color:  black;
+}
+/* The container <div> - needed to position the dropdown content */
+
+
+/* Dropdown Content (Hidden by Default) */
+.dropdownContent {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  border-radius: 6px;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+
+/* Links inside the dropdown */
+.dropDButton {
+  background-color: transparent;
+  border-color: transparent;
+  width: 100%;
+  border: none;
+  box-shadow: none;
+  display: block;
+}
+a {
+  text-decoration: none;
+}
+/* Change color of dropdown links on hover */
+.dropDButton:hover {background-color: #f1f1f1}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdownContent {
+  display:grid;
+}
+
+.BurgerIcon{
+  width: 100%;
+  height: 100%;
+  border-radius: 0px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/* .button {
+  background-color: #2ea44f;
+  border-radius: 6px;
+  font-size: 14px;
+  box-shadow: rgba(27, 31, 35, .1) 0 1px 0;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.button:hover {
+  background-color: #2c974b;
+} */
