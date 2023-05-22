@@ -1,8 +1,10 @@
 const express=require('express');
-const getCharById=require('./controllers/getCharById.js');
+//const getCharById=require('./controllers/getCharById.js');
 const router=require('./routes/index.js');
 const server=express();
 
+
+server.use(express.json());
 server.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Credentials', 'true');
@@ -16,7 +18,7 @@ server.use((req, res, next) => {
     );
     next();
 });
-server.use(express.json());
+
 server.use('/rickandmorty',router)
 
 const PORT=3001;
