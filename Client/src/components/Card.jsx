@@ -3,7 +3,7 @@ import style from "../styles/Card.module.css"
 import { Link, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { connect } from "react-redux";
-import { addFav, removeFav } from "../redux/actions"
+import { addFav, removeFav } from "../redux/action"
 
 
 const Card = (props) => {

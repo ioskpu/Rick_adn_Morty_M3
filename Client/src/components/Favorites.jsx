@@ -1,7 +1,7 @@
 import React from "react";
 import Card from "./Card";
 import { connect, useDispatch, useSelector } from "react-redux";
-import { removeFav, orderCards, filterCards } from "../redux/actions";
+import { removeFav, orderCards, filterCards } from "../redux/action";
 import { useState } from "react";
 
 
