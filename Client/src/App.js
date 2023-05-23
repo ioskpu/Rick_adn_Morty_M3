@@ -15,8 +15,7 @@ function App() {
   const location = useLocation();
 
   const [access, setAccess] = React.useState(false);
-  // const EMAIL = "Danigomez.serme@gmail.com";
-  // const PASSWORD =  "@Qwerty1";
+  
 
   async function login(userData) {
     try {
@@ -51,14 +50,14 @@ function App() {
       const url = "http://localhost:3001/rickandmorty/character/" + id;
 
       const { data } = await axios(url);
-      const char = characters?.find((e) => e.id === Number(data.id));
+      const char = characters?.find((event) => event.id === Number(data.id));
 
       if (char) {
-        alert("Already in the list");
+        alert("Ya existe en la lista");
       } else if (data.id !== undefined) {
         setCharacters((characters) => [...characters, data]);
       } else {
-        alert("Character not found");
+        alert("No hay personajes con ese ID!");
       }
     } catch (error) {
       return { error: error.message };
