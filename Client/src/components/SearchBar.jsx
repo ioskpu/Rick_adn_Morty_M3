@@ -20,7 +20,7 @@ const SearchBar = ({onSearch}) => {
 
    return (
       <div className={style.searchBar}>
-         <input onChange={handleChange} onKeyUp={handleEnter} type='search' className={style.input} placeholder="Look for a Character"/>
+         <input onChange={handleChange} onKeyUp={handleEnter} type='search' className={style.input} placeholder="Buscar personajes"/>
             <button onClick={()=>onSearch(id)} className={style.btnInput}>
             <img src={lupa} className={style.lupa} alt={"paila"} />
             </button>

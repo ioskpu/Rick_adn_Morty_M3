@@ -71,7 +71,7 @@ const Form = ({login}) => {
                 <input name="password" value={userData.password} onChange={handleChange} placeholder=""></input>
                 <p className={style.danger}>{errors.password}</p>
                 {Object.keys(errors).length === 0 ? (
-                        <button type="submit" >Submit</button>
+                        <button type="submit" >Entrar</button>
                 ) : null}  
                 </div>
       

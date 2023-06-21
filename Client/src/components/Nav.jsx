@@ -40,15 +40,15 @@ const Nav = ({ logout, onSearch }) => {
         </button>
         <div className={style.dropdownContent}>
           <Link to="/home">
-            <button className={style.dropDButton}>Home</button>
+            <button className={style.dropDButton}>Inicio</button>
           </Link>
           <Link to="/about">
-            <button className={style.dropDButton}>About</button>
+            <button className={style.dropDButton}>Acerca de</button>
           </Link>
           <Link to="/favorites">
-            <button className={style.dropDButton}>Favorites</button>
+            <button className={style.dropDButton}>Favoritos</button>
           </Link>
-          <button className={style.dropDButton} onClick={logout}>LogOut</button>
+          <button className={style.dropDButton} onClick={logout}>Salir</button>
         </div>
       </div>
 

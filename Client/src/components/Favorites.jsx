@@ -29,18 +29,18 @@ const Favorites = () => {
     <div>
 
       <select onChange={handleOrder} name="order" defaultValue={"DEFAULT"}>
-        <option value="DEFAULT" disable>Select Order</option>
+        <option value="DEFAULT" disable>Selecione el orden</option>
         <option value="A">Ascendente</option>
         <option value="D">Descendente</option>
       </select>
 
       <select onChange={handleFilter} name="filter" defaultValue={"DEFAULT"}>
-        <option value="DEFAULT" disable>Select Filter</option>
-        <option value="Male">Male</option>
-        <option value="Female">Female</option>
-        <option value="Genderless">Genderless</option>
-        <option value="unknown">unknown</option>
-        <option value="allCharacters">All Characters</option>
+        <option value="DEFAULT" disable>Seleccione el Filtro</option>
+        <option value="Male">Masculino</option>
+        <option value="Female">Femenino</option>
+        <option value="Genderless">Sin género</option>
+        <option value="unknown">Desconocido</option>
+        <option value="allCharacters">Todos los personajes</option>
       </select> 
 
 
